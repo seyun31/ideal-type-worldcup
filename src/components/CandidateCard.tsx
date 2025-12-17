@@ -1,8 +1,14 @@
 import { useMemo } from 'react';
+import { Candidate } from '../types';
 
 const COLORS = ['#FF69B4', '#FFB6D9', '#E6B3FF', '#D4A5FF'];
 
-function CandidateCard({ candidate, onClick }) {
+interface CandidateCardProps {
+  candidate: Candidate;
+  onClick: () => void;
+}
+
+function CandidateCard({ candidate, onClick }: CandidateCardProps) {
   const randomColor = useMemo(() => {
     const hash = candidate.name.split('').reduce((acc, char) => {
       return char.charCodeAt(0) + ((acc << 5) - acc);

@@ -1,4 +1,8 @@
-function StartScreen({ onStartGame }) {
+interface StartScreenProps {
+  onStartGame: (rounds: number) => void;
+}
+
+function StartScreen({ onStartGame }: StartScreenProps) {
   return (
     <div className="min-h-screen flex items-center justify-center p-6">
       <div className="text-center">

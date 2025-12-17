@@ -1,4 +1,6 @@
-export const candidates = [
+import { Candidate } from '../types';
+
+export const candidates: Candidate[] = [
   {
     id: 1,
     name: '정국',

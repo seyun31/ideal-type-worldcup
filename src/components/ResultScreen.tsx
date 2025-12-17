@@ -1,4 +1,11 @@
-function ResultScreen({ winner, onRestartGame }) {
+import { Candidate } from '../types';
+
+interface ResultScreenProps {
+  winner: Candidate;
+  onRestartGame: () => void;
+}
+
+function ResultScreen({ winner, onRestartGame }: ResultScreenProps) {
   return (
     <div className="min-h-screen flex items-center justify-center p-6">
       <div className="text-center">

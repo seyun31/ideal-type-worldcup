@@ -1,12 +1,19 @@
 import CandidateCard from './CandidateCard';
+import { Candidate } from '../types';
 
-function GameScreen({ currentRound, currentMatchIndex, onSelectCandidate }) {
+interface GameScreenProps {
+  currentRound: Candidate[];
+  currentMatchIndex: number;
+  onSelectCandidate: (candidate: Candidate) => void;
+}
+
+function GameScreen({ currentRound, currentMatchIndex, onSelectCandidate }: GameScreenProps) {
   const candidate1 = currentRound[currentMatchIndex];
   const candidate2 = currentRound[currentMatchIndex + 1];
   const matchNumber = Math.floor(currentMatchIndex / 2) + 1;
   const totalMatches = Math.floor(currentRound.length / 2);
 
-  const getRoundName = () => {
+  const getRoundName = (): string => {
     const roundSize = currentRound.length;
     if (roundSize === 2) return '결승';
     if (roundSize === 4) return '4강';

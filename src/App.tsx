@@ -1,20 +1,21 @@
-import { useState } from 'react'
-import StartScreen from './components/StartScreen'
-import GameScreen from './components/GameScreen'
-import ResultScreen from './components/ResultScreen'
-import RoundStartModal from './components/RoundStartModal'
-import { candidates } from './data/candidates'
+import { useState } from 'react';
+import StartScreen from './components/StartScreen';
+import GameScreen from './components/GameScreen';
+import ResultScreen from './components/ResultScreen';
+import RoundStartModal from './components/RoundStartModal';
+import { candidates } from './data/candidates';
+import { Candidate, GameState } from './types';
 
 function App() {
-  const [gameState, setGameState] = useState('start'); // start, roundStart, playing, result
-  const [currentRound, setCurrentRound] = useState([]);
-  const [nextRound, setNextRound] = useState([]);
-  const [currentMatchIndex, setCurrentMatchIndex] = useState(0);
-  const [winner, setWinner] = useState(null);
-  const [pendingRoundSize, setPendingRoundSize] = useState(null);
+  const [gameState, setGameState] = useState<GameState>('start');
+  const [currentRound, setCurrentRound] = useState<Candidate[]>([]);
+  const [nextRound, setNextRound] = useState<Candidate[]>([]);
+  const [currentMatchIndex, setCurrentMatchIndex] = useState<number>(0);
+  const [winner, setWinner] = useState<Candidate | null>(null);
+  const [pendingRoundSize, setPendingRoundSize] = useState<number | null>(null);
 
   // 배열 섞기 함수
-  const shuffleArray = (array) => {
+  const shuffleArray = (array: Candidate[]): Candidate[] => {
     const shuffled = [...array];
     for (let i = shuffled.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -24,14 +25,14 @@ function App() {
   };
 
   // 게임 시작 (라운드 알림 표시)
-  const startGame = (rounds) => {
+  const startGame = (rounds: number): void => {
     setPendingRoundSize(rounds);
     setGameState('roundStart');
   };
 
   // 실제 게임 시작
-  const beginRound = () => {
-    const shuffled = shuffleArray(candidates).slice(0, pendingRoundSize);
+  const beginRound = (): void => {
+    const shuffled = shuffleArray(candidates).slice(0, pendingRoundSize!);
     setCurrentRound(shuffled);
     setNextRound([]);
     setCurrentMatchIndex(0);
@@ -39,7 +40,7 @@ function App() {
   };
 
   // 라운드 이름 가져오기
-  const getRoundName = (size) => {
+  const getRoundName = (size: number | null): string => {
     if (size === 2) return '결승';
     if (size === 4) return '4강';
     if (size === 8) return '8강';
@@ -48,7 +49,7 @@ function App() {
   };
 
   // 선택 처리
-  const selectCandidate = (selectedCandidate) => {
+  const selectCandidate = (selectedCandidate: Candidate): void => {
     const updatedNextRound = [...nextRound, selectedCandidate];
     const nextMatchIndex = currentMatchIndex + 2;
 
@@ -72,7 +73,7 @@ function App() {
   };
 
   // 다음 라운드 시작
-  const startNextRound = () => {
+  const startNextRound = (): void => {
     setCurrentRound(nextRound);
     setNextRound([]);
     setCurrentMatchIndex(0);
@@ -80,7 +81,7 @@ function App() {
   };
 
   // 게임 재시작
-  const restartGame = () => {
+  const restartGame = (): void => {
     setGameState('start');
     setWinner(null);
     setCurrentRound([]);
@@ -117,8 +118,8 @@ function App() {
 
   // 결과 화면
   if (gameState === 'result') {
-    return <ResultScreen winner={winner} onRestartGame={restartGame} />;
+    return <ResultScreen winner={winner!} onRestartGame={restartGame} />;
   }
 }
 
-export default App
+export default App;

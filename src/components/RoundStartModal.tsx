@@ -1,4 +1,9 @@
-function RoundStartModal({ roundName, onStart }) {
+interface RoundStartModalProps {
+  roundName: string;
+  onStart: () => void;
+}
+
+function RoundStartModal({ roundName, onStart }: RoundStartModalProps) {
   return (
     <div className="fixed inset-0 backdrop-blur-lg flex items-center justify-center z-50 p-6">
       <div className="bg-white rounded-3xl border-4 border-[#FF69B4] p-12 md:p-16 max-w-2xl w-full text-center shadow-[0_16px_64px_rgba(255,105,180,0.4)] animate-[scaleIn_0.3s_ease]">
