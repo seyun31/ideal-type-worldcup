@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'DungGeunMo';
+  src: url('./fonts/DungGeunMo.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  --pink-primary: #FF69B4;
+  --pink-light: #FFB6D9;
+  --pink-pastel: #FFC0E5;
+  --purple-light: #E6B3FF;
+  --lavender: #D4A5FF;
+  --mint: #B4F0D4;
+  --yellow-pastel: #FFF5B8;
+  --cream: #FFF8F0;
+}
+
+body {
+  font-family: 'DungGeunMo', sans-serif;
+  background: linear-gradient(135deg, #FFE5F1 0%, #FFD1E8 50%, #FFC0E5 100%);
+  min-height: 100vh;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
