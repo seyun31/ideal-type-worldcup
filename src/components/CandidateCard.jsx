@@ -1,6 +1,14 @@
+import { useMemo } from 'react';
+
+const COLORS = ['#FF69B4', '#FFB6D9', '#E6B3FF', '#D4A5FF'];
+
 function CandidateCard({ candidate, onClick }) {
-  const colors = ['#FF69B4', '#FFB6D9', '#E6B3FF', '#D4A5FF'];
-  const randomColor = colors[Math.floor(Math.random() * colors.length)];
+  const randomColor = useMemo(() => {
+    const hash = candidate.name.split('').reduce((acc, char) => {
+      return char.charCodeAt(0) + ((acc << 5) - acc);
+    }, 0);
+    return COLORS[Math.abs(hash) % COLORS.length];
+  }, [candidate.name]);
 
   return (
     <div

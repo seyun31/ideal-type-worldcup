@@ -11,7 +11,6 @@ function App() {
   const [nextRound, setNextRound] = useState([]);
   const [currentMatchIndex, setCurrentMatchIndex] = useState(0);
   const [winner, setWinner] = useState(null);
-  const [showRoundStart, setShowRoundStart] = useState(false);
   const [pendingRoundSize, setPendingRoundSize] = useState(null);
 
   // 배열 섞기 함수
@@ -27,7 +26,6 @@ function App() {
   // 게임 시작 (라운드 알림 표시)
   const startGame = (rounds) => {
     setPendingRoundSize(rounds);
-    setShowRoundStart(true);
     setGameState('roundStart');
   };
 
@@ -37,7 +35,6 @@ function App() {
     setCurrentRound(shuffled);
     setNextRound([]);
     setCurrentMatchIndex(0);
-    setShowRoundStart(false);
     setGameState('playing');
   };
 
@@ -65,7 +62,6 @@ function App() {
         // 다음 라운드로 (라운드 시작 알림 표시)
         setPendingRoundSize(updatedNextRound.length);
         setNextRound(updatedNextRound);
-        setShowRoundStart(true);
         setGameState('roundStart');
       }
     } else {
@@ -80,7 +76,6 @@ function App() {
     setCurrentRound(nextRound);
     setNextRound([]);
     setCurrentMatchIndex(0);
-    setShowRoundStart(false);
     setGameState('playing');
   };
 
@@ -91,7 +86,6 @@ function App() {
     setCurrentRound([]);
     setNextRound([]);
     setCurrentMatchIndex(0);
-    setShowRoundStart(false);
     setPendingRoundSize(null);
   };
 
